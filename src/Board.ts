@@ -1,5 +1,6 @@
 import Map from "./Map";
 import Tile from "./Tile"
+import TileFactory from "./TileFactory";
 
 export default class Board {
     private map: Map;
@@ -14,7 +15,7 @@ export default class Board {
         const mapData = this.map.getRange(fromX, fromY, toX, toY);
         const tiles: Tile[][] = mapData.map(x => {
             const row: Tile[] = x.map(y => {
-                return new Tile(y);
+                return TileFactory.GetTile(y);
             })
             return row;
         })

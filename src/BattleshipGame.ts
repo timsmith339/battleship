@@ -27,7 +27,7 @@ export class BattleshipGame {
   private config() {
     this.tiles = [];
     const board = new Board(new Map())
-    const tiles: Tile[][] = board.getTiles(1, 1, 11, 11)
+    const tiles: Tile[][] = board.getTiles(0, 0, 10, 10)
 
     for (let x = 0; x < 10; x++) {
       for (let y = 0; y < 10; y++) {
