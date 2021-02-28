@@ -1,10 +1,12 @@
-import Block from "./Tile";
+import Board from "./Board";
+import Map from "./Map";
+import Tile from "./Tile";
 
 export class BattleshipGame {
   private readonly BLOCKWIDTH = 30;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
-  private blocks: Block[];
+  private tiles: Tile[];
 
   constructor() {
     this.canvas = document.createElement("canvas");
@@ -23,14 +25,16 @@ export class BattleshipGame {
   }
 
   private config() {
-    this.blocks = [];
+    this.tiles = [];
+    const board = new Board(new Map())
+    const tiles: Tile[][] = board.getTiles(1, 1, 11, 11)
+
     for (let x = 0; x < 10; x++) {
       for (let y = 0; y < 10; y++) {
-        const block = new Block(1, 30, 30);
+        const tile = tiles[x][y];
         const blockX = x * this.BLOCKWIDTH;
         const blockY = y * this.BLOCKWIDTH;
-        console.log(`block: ${blockX}, ${blockY}`);
-        block.draw(blockX, blockY, this.ctx);
+        tile.draw(blockX, blockY, this.ctx);
       }
     }
     // const { width, height } = this.canvas;

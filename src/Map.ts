@@ -1,6 +1,6 @@
 export default class Map {
-    private tiles: Number[][];
-    
+    private tiles: number[][];
+
     constructor() {
         let mapData = `[
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -25,14 +25,14 @@ export default class Map {
     //     this.tiles = JSON.parse(mapData);
     // }
 
-    public get(x: number, y: number): Number {
+    public get(x: number, y: number): number {
         return this.tiles[x][y];
     }
 
-    public getRange(fromX: number, fromY: number, toX: number, toY: number): Number[][] {
-        let newTiles: Number[][] = [];
+    public getRange(fromX: number, fromY: number, toX: number, toY: number): number[][] {
+        let newTiles: number[][] = [];
         for (let x = fromX; x <= toX; x++) {
-            newTiles.push(this.tiles[x].slice(fromY, toY+1));
+            newTiles.push(this.tiles[x].slice(fromY, toY + 1));
         }
         return newTiles;
     }
