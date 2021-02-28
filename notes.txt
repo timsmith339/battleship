@@ -1,0 +1,75 @@
+Goal:  
+- Draw a board, 10x10 (or whatever dimensions)
+- Board is divided into square tiles
+- The tiles are loaded from a source JSON document with data for each tile. (Image / passable? / etc)
+- The board is a view of a much larger map
+- The board center is where the player is
+- If the player is at an edge, the edge should line up in the middle of the board with empty space filling the rest
+
+- If the board is (hypothetically) only 2 tiles wide, and if the player is centered in a tile, then the board should show half tiles on each side.
+
+
+-------------
+|  |  x  |  |
+|__|_____|__|
+
+Player: {
+    Coords: { x, y }
+}
+TileTypes: [
+    { name: "grass", passable: true, image: "images/grass.jpg" },
+    { name: "wall", passable: false, image: "images/wall.jpg },
+    { name: "wood_floor", passable: false, image: "images/wood_floor.jpg },
+]
+- Each tile is 50px wide.  This whole map below is 18 tiles wide, or 900 pixels.
+- If we're showing 6 tiles wide, (300px), we would need to load 7 tiles if player is in the center of one tile.
+- I need an algorithm to load the tiles surrounding the player.
+
+- player middle of tiles:
+|   |   |   x   |   |   |
+
+- player in center of tile:
+| |   |   | x |   |   | |
+
+-player edge of map:
+            |x  |   |   |
+
+MapData = {
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 1, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+}
+
+class Map {
+    const tiles: Tile[][]
+    constructor() {
+
+    }
+    function get(x, y) {
+        return tiles[x][y]
+    }
+}
+
+[Tile, Tile, Tile, Tile, Tile, ...]
+[Tile, Tile, Tile, Tile, Tile, ...]
+[Tile, Tile, Tile, Tile, Tile, ...]
+[Tile, Tile, Tile, Tile, Tile, ...]
+[Tile, Tile, Tile, Tile, Tile, ...]
+[Tile, Tile, Tile, Tile, Tile, ...]
+
+Loaded into memory: 
+
+
+

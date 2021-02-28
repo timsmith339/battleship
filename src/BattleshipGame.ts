@@ -1,17 +1,15 @@
-import Star from "./Star";
+import Block from "./Tile";
 
 export class BattleshipGame {
-  private readonly STARCOUNT = 100;
+  private readonly BLOCKWIDTH = 30;
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
-  private stars: Star[];
+  private blocks: Block[];
 
   constructor() {
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
-
-    this.config();
 
     requestAnimationFrame(() => this.draw());
   }
@@ -19,19 +17,27 @@ export class BattleshipGame {
   private draw() {
     this.resizeCanvasIfNeeded();
 
-    for (let star of this.stars) {
-      Star.draw(star.position.x, star.position.y, this.ctx);
-    }
+    this.config();
 
     requestAnimationFrame(() => this.draw());
   }
 
   private config() {
-    this.stars = [];
-    const { width, height } = this.canvas;
-    for (let i = 0; i < this.STARCOUNT; i++) {
-      this.stars.push(new Star(width, height));
+    this.blocks = [];
+    for (let x = 0; x < 10; x++) {
+      for (let y = 0; y < 10; y++) {
+        
+        const block = new Block(this.BLOCKWIDTH, this.BLOCKWIDTH);
+        const blockX = x * this.BLOCKWIDTH;
+        const blockY = y * this.BLOCKWIDTH;
+        console.log(`block: ${blockX}, ${blockY}`)
+        block.draw(blockX, blockY, this.ctx);
+      } 
     }
+    // const { width, height } = this.canvas;
+    // for (let i = 0; i < this.STARCOUNT; i++) {
+    //   this.stars.push(new Star(width, height));
+    // }
   }
 
   private resizeCanvasIfNeeded() {
