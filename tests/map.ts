@@ -5,7 +5,7 @@ import Map from "../src/Map";
 describe('Map', () => {
     let map: Map;
     before(() => {
-        map = new Map();
+        map = new Map(); 
     })
     it('Gets correct tiles', () => {
         expect(map.get(0, 0)).to.equal(1);

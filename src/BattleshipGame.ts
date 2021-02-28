@@ -26,13 +26,12 @@ export class BattleshipGame {
     this.blocks = [];
     for (let x = 0; x < 10; x++) {
       for (let y = 0; y < 10; y++) {
-        
-        const block = new Block(this.BLOCKWIDTH, this.BLOCKWIDTH);
+        const block = new Block(1, 30, 30);
         const blockX = x * this.BLOCKWIDTH;
         const blockY = y * this.BLOCKWIDTH;
-        console.log(`block: ${blockX}, ${blockY}`)
+        console.log(`block: ${blockX}, ${blockY}`);
         block.draw(blockX, blockY, this.ctx);
-      } 
+      }
     }
     // const { width, height } = this.canvas;
     // for (let i = 0; i < this.STARCOUNT; i++) {
