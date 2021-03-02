@@ -3,7 +3,7 @@ import Grass from "./Tiles/Grass";
 import WoodFloor from "./Tiles/WoodFloor";
 
 export default class TileFactory {
-    static GetTile(tileId: number) {
+    static GetTile(tileId : number) {
         switch (tileId) {
             case 0:
                 return new Grass();

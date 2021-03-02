@@ -1,57 +1,36 @@
 import Board from "./Board";
 import Map from "./Map";
-import Tile from "./Tile";
 
 export class BattleshipGame {
-  private readonly BLOCKWIDTH = 30;
-  private canvas: HTMLCanvasElement;
-  private ctx: CanvasRenderingContext2D;
-  private tiles: Tile[];
+    private window = window;
+    private canvas : HTMLCanvasElement;
+    private ctx : CanvasRenderingContext2D;
+    private board: Board;
 
-  constructor() {
-    this.canvas = document.createElement("canvas");
-    this.ctx = this.canvas.getContext("2d");
-    document.body.appendChild(this.canvas);
+    constructor() {
+        this.canvas = document.createElement("canvas");
+        this.ctx = this.canvas.getContext("2d");
 
-    requestAnimationFrame(() => this.draw());
-  }
-
-  private draw() {
-    this.resizeCanvasIfNeeded();
-
-    this.config();
-
-    requestAnimationFrame(() => this.draw());
-  }
-
-  private config() {
-    this.tiles = [];
-    const board = new Board(new Map())
-    const tiles: Tile[][] = board.getTiles(0, 0, 10, 10)
-
-    for (let x = 0; x < 10; x++) {
-      for (let y = 0; y < 10; y++) {
-        const tile = tiles[x][y];
-        const blockX = x * this.BLOCKWIDTH;
-        const blockY = y * this.BLOCKWIDTH;
-        tile.draw(blockX, blockY, this.ctx);
-      }
+        document.body.style.margin = "0";
+        document.body.appendChild(this.canvas);
+        
+        addEventListener('resize', () => this.resize())
+        this.resize();
+        
+        this.board = new Board(new Map(), this.canvas.width, this.canvas.height);
+        const drawLoop: NodeJS.Timeout = setInterval(() => this.draw(), 200);
     }
-    // const { width, height } = this.canvas;
-    // for (let i = 0; i < this.STARCOUNT; i++) {
-    //   this.stars.push(new Star(width, height));
-    // }
-  }
 
-  private resizeCanvasIfNeeded() {
-    if (
-      this.canvas.width !== window.innerWidth ||
-      this.canvas.height !== window.innerHeight
-    ) {
-      this.canvas.width = window.innerWidth; // resize this.canvas
-      this.canvas.height = window.innerHeight; // also clears this.canvas
-    } else {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    private draw() {
+        this.drawBoard();
     }
-  }
+
+    private drawBoard() {
+        this.board.drawBoard(this.ctx);
+    }
+
+    private resize() {
+        this.canvas.width = this.window.innerWidth;
+        this.canvas.height = this.window.innerHeight;
+    }
 }

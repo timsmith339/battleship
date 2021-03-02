@@ -1,11 +1,11 @@
-abstract class Tile {
-  abstract tileId: number;
-  protected width: number = 30;
-  protected height: number = 30;
+import Config from "./Config";
 
-  constructor() { }
+export default abstract class Tile {
+    abstract tileId : number;
+    protected width : number = Config.TILEWIDTH;
+    protected height : number = Config.TILEWIDTH;
 
-  abstract draw(cx: number, cy: number, ctx: CanvasRenderingContext2D): void;
+    constructor() {}
+
+    abstract draw(cx : number, cy : number, ctx : CanvasRenderingContext2D): void;
 }
-
-export default Tile;
